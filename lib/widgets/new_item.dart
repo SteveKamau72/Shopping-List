@@ -41,6 +41,7 @@ class _NewItem extends State<NewItem> {
             children: [
               TextFormField(
                 maxLength: 50,
+                keyboardType: TextInputType.name,
                 decoration: const InputDecoration(
                   label: Text('Name'),
                 ),
