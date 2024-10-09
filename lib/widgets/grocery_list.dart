@@ -55,8 +55,7 @@ class _GroceryListState extends State<GroceryList> {
   }
 
   void _fetchItems() async {
-    final url = Uri.https('shopping-list-9c474-default-rtdb.firebaseio.com',
-        'shopping-list.json');
+    final url = Uri.https('yourhost.firebaseio.com', 'shopping-list.json');
     try {
       final response = await http.get(url);
 

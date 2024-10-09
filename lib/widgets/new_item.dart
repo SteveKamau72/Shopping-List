@@ -26,8 +26,7 @@ class _NewItem extends State<NewItem> {
       setState(() {
         _isSending = true;
       });
-      final url = Uri.https('shopping-list-9c474-default-rtdb.firebaseio.com',
-          'shopping-list.json');
+      final url = Uri.https('yourhost.firebaseio.com', 'shopping-list.json');
       try {
         final response = await http.post(url,
             headers: {'Content-Type': 'application/json'},
