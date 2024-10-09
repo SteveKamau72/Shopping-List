@@ -28,24 +28,30 @@ class _NewItem extends State<NewItem> {
       });
       final url = Uri.https('shopping-list-9c474-default-rtdb.firebaseio.com',
           'shopping-list.json');
-      final response = await http.post(url,
-          headers: {'Content-Type': 'application/json'},
-          body: json.encode({
-            'name': _enteredName,
-            'quantity': _enteredQuantity,
-            'category': _selectedCategory.title,
-          }));
-      if (!context.mounted) {
-        return;
+      try {
+        final response = await http.post(url,
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode({
+              'name': _enteredName,
+              'quantity': _enteredQuantity,
+              'category': _selectedCategory.title,
+            }));
+        if (!context.mounted) {
+          return;
+        }
+
+        final Map<String, dynamic> resData = json.decode(response.body);
+
+        Navigator.of(context).pop(GroceryItem(
+            id: resData['name'],
+            name: _enteredName,
+            quantity: _enteredQuantity,
+            category: _selectedCategory));
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Something went wrong, try again!"),
+        ));
       }
-
-      final Map<String, dynamic> resData = json.decode(response.body);
-
-      Navigator.of(context).pop(GroceryItem(
-          id: resData['name'],
-          name: _enteredName,
-          quantity: _enteredQuantity,
-          category: _selectedCategory));
     }
   }
 
